@@ -39,7 +39,7 @@ def register(key):
 
         time= datetime.strptime(f'{datetime.now(tz=timezone.utc).strftime("%m/%d/%Y/%H")}/{start_time_dict[key]}', '%m/%d/%Y/%H/%M/%S.%f')
         options = webdriver.ChromeOptions()
-        # options.headless = True
+        options.headless = True
         options.add_argument('--blink-settings=imagesEnabled=false')
         caps = DesiredCapabilities().CHROME
         caps["pageLoadStrategy"] = "none"

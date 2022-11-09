@@ -8,3 +8,4 @@ test*
 .idea
 config.json
 gsheet_email_key.json
+email_key.json
