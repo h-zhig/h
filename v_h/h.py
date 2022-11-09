@@ -45,7 +45,8 @@ def register(key):
         caps["pageLoadStrategy"] = "none"
         driver = webdriver.Chrome(desired_capabilities=caps, options=options)
         driver.delete_all_cookies()
-        driver.get(sys.argv[3])
+        # driver.get(sys.argv[3])
+        driver.get('https://konzinfoidopont.mfa.gov.hu/')
         f = Hungary(driver)
         logging.warning('Создали драйвер. Открыли сайт')
         for i in range(3):
