@@ -23,8 +23,13 @@ class Hungary(BasePage):
 
 gs = gsheets.GoogleSheets('hungary')
 
-user = int(sys.argv[2])
-base_url = gsheets
+# user = int(sys.argv[2])
+# base_url = gsheets
+
+if int(sys.argv[1]) <= 4:
+    user = int(sys.argv[2])
+else:
+    user = int(sys.argv[3])
 
 id_email, email, password, name, date, phone, passport, used, count_person, date_min, date_max = gs.ws.get_all_values()[
     user]
@@ -34,8 +39,8 @@ def register(key):
     try:
         logging.warning(sys.argv[1])
         logging.warning(user)
-        start_time_dict = {'1': '59/56.0', '2': '59/58.5', '3': '59/57.0', '4': '59/57.5',
-                           '5': '59/58.0', '6': '59/56.5', '7': '59/58.5'}
+        start_time_dict = {'1': '59/56.0', '2': '59/56.5', '3': '59/57.0', '4': '59/57.5',
+                           '5': '59/57.0', '6': '59/56.5', '7': '59/56.0'}
 
         time= datetime.strptime(f'{datetime.now(tz=timezone.utc).strftime("%m/%d/%Y/%H")}/{start_time_dict[key]}', '%m/%d/%Y/%H/%M/%S.%f')
         options = webdriver.ChromeOptions()
@@ -45,7 +50,7 @@ def register(key):
         caps["pageLoadStrategy"] = "none"
         driver = webdriver.Chrome(desired_capabilities=caps, options=options)
         driver.delete_all_cookies()
-        driver.get(sys.argv[3])
+        driver.get(sys.argv[4])
         f = Hungary(driver)
         logging.warning('Создали драйвер. Открыли сайт')
         for i in range(3):
