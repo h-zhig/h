@@ -1,7 +1,6 @@
 import logging
 from datetime import datetime, timezone
 
-import undetected_chromedriver as uc
 from time import sleep
 
 import os, sys
@@ -26,23 +25,26 @@ gs = gsheets.GoogleSheets('hungary')
 # user = int(sys.argv[2])
 # base_url = gsheets
 
-if int(sys.argv[1]) <= 4:
-    user = int(sys.argv[2])
-else:
-    user = int(sys.argv[3])
 
-id_email, email, password, name, date, phone, passport, used, count_person, date_min, date_max = gs.ws.get_all_values()[
-    user]
+t = sys.argv[1]
+user = int(sys.argv[2])
+index = int(sys.argv[3])
+
+id_email, email, password, name, date, phone, passport, used, count_person, date_min, date_max = gs.ws.get_all_values()[user]
 
 
-def register(key):
+def register(dt):
     try:
         logging.warning(sys.argv[1])
         logging.warning(user)
+<<<<<<< HEAD
         start_time_dict = {'1': '59/56.5', '2': '59/57.5', '3': '59/58.5', '4': '59/57.0',
                            '5': '59/56.5', '6': '59/57.5', '7': '59/58.5', '8': '59/54.5'}
 
         time= datetime.strptime(f'{datetime.now(tz=timezone.utc).strftime("%m/%d/%Y/%H")}/{start_time_dict[key]}', '%m/%d/%Y/%H/%M/%S.%f')
+=======
+        time= datetime.strptime(f'{datetime.now(tz=timezone.utc).strftime("%m/%d/%Y/%H")}/{dt}', '%m/%d/%Y/%H/%M/%S.%f')
+>>>>>>> 1ad0b45c43f6307bc764dc8ece55568d42d4836b
         options = webdriver.ChromeOptions()
         options.headless = True
         options.add_argument('--blink-settings=imagesEnabled=false')
@@ -54,8 +56,7 @@ def register(key):
         f = Hungary(driver)
         logging.warning('Создали драйвер. Открыли сайт')
         for i in range(3):
-            if not f.is_element_displayed('//button[@id="langSelector"]') or not f.is_element_displayed(
-                    '//input[@id="birthDate"]'):
+            if not f.is_element_displayed('//button[@id="langSelector"]') or not f.is_element_displayed('//input[@id="birthDate"]'):
                 driver.refresh()
                 sleep(3)
             else:
@@ -142,13 +143,13 @@ def register(key):
                 break
             except Exception as e:
                 sleep(0.1)
-        click_span = int(key)
+        click_span = int(index)
         dt = datetime.strptime(datetime.now(tz=timezone.utc).strftime('%m/%d/%Y/%H/%M/%S.%f'), '%m/%d/%Y/%H/%M/%S.%f')
         logging.warning(f'Нажали выбор даты:{dt}')
         if f.is_element_displayed('//span[text()="Свободно"]'):
             count_span = len(driver.find_elements(By.XPATH, '//span[text()="Свободно"]'))
             source = driver.page_source
-            if count_span < int(key):
+            if count_span < int(index):
                 click_span = count_span
                 logging.warning(f'меняем дату на слот {count_span} ')
             for i in range(25):
@@ -171,7 +172,7 @@ def register(key):
             logging.warning(
                 f"Нажали далее в {datetime.strptime(datetime.now(tz=timezone.utc).strftime('%m/%d/%Y/%H/%M/%S.%f'), '%m/%d/%Y/%H/%M/%S.%f')}")
             # telegram.send_message(f'{thread}: {datetime.now()}')
-            telegram.send_doc(f'В. Даты {name}, {start_time_dict[key]}', source)
+            telegram.send_doc(f'В. Даты {name}, {t}', source)
             sleep(90)
             telegram.send_doc(f'В. Перед завершением бронирования {name}', driver.page_source)
             f.click_on_while('Завершение бронирования')
@@ -179,18 +180,18 @@ def register(key):
                                    '%m/%d/%Y/%H/%M/%S.%f')
             logging.warning(f'ЗАПИСАН:({name}): {dt}')
             sleep(10)
-            telegram.send_doc(f'🟩В: в {dt} успешно зарегистрирован({name} {start_time_dict[key]})',
+            telegram.send_doc(f'🟩В: в {dt} успешно зарегистрирован({name} {t})',
                               driver.page_source)
         else:
             if f.is_element_displayed(
                     '//div[text()="Обращаем Ваше внимание, что у Вас уже есть действующая запись для решения данного вопроса."]'):
-                telegram.send_doc(f'⭕В {name} уже зареген другим сеансом {start_time_dict[key]}',
+                telegram.send_doc(f'⭕В {name} уже зареген другим сеансом {t}',
                                   driver.page_source)
                 logging.warning('Уже зареген')
                 driver.close()
             else:
-                telegram.send_doc(f'⭕В для:{name} нет дат {start_time_dict[key]}', driver.page_source)
-                logging.warning(f'Нет дат: {start_time_dict[key]}')
+                telegram.send_doc(f'⭕В для:{name} нет дат {t}', driver.page_source)
+                logging.warning(f'Нет дат: {t}')
                 if f.is_element_displayed('//button[text()="Хорошо"]'):
                     for i in range(20):
                         try:
@@ -203,7 +204,7 @@ def register(key):
                         raise RuntimeError("Не нажимается хорошо")
     except Exception as e:
         try:
-            telegram.send_image(driver, f'В неизвестная ошибка {str(e)} {start_time_dict[key]}')
+            telegram.send_image(driver, f'В неизвестная ошибка {str(e)} {t}')
         except Exception:
             telegram.send_message(f'В неизвестная ошибка. {str(e)}')
 
