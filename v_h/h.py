@@ -37,16 +37,13 @@ def register(dt):
     try:
         logging.warning(sys.argv[1])
         logging.warning(user)
-<<<<<<< HEAD
+
         start_time_dict = {'1': '59/56.5', '2': '59/57.5', '3': '59/58.5', '4': '59/57.0',
                            '5': '59/56.5', '6': '59/57.5', '7': '59/58.5', '8': '59/54.5'}
 
-        time= datetime.strptime(f'{datetime.now(tz=timezone.utc).strftime("%m/%d/%Y/%H")}/{start_time_dict[key]}', '%m/%d/%Y/%H/%M/%S.%f')
-=======
         time= datetime.strptime(f'{datetime.now(tz=timezone.utc).strftime("%m/%d/%Y/%H")}/{dt}', '%m/%d/%Y/%H/%M/%S.%f')
->>>>>>> 1ad0b45c43f6307bc764dc8ece55568d42d4836b
         options = webdriver.ChromeOptions()
-        options.headless = True
+        # options.headless = True
         options.add_argument('--blink-settings=imagesEnabled=false')
         caps = DesiredCapabilities().CHROME
         caps["pageLoadStrategy"] = "none"

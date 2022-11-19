@@ -1,4 +1,4 @@
-name: Hungary 121
+name: Hungary 137
 
 on:
   schedule:
@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        tag: ['59/55.5', '59/56.0', '59/56.5', '59/57.0', '59/57.5', '59/58.0', '59/58.5', '59/59.0']
+        tag: ['59/56.0', '59/56.5', '59/57.0', '59/57.5']
     steps:
       - uses: actions/checkout@v2
       - name: Cache requirements
@@ -35,4 +35,4 @@ jobs:
       - name: Test python
         run: |
           BASE_URL=${{ secrets.BASE_URL }}
-          python3 v_h/h.py ${{ matrix.tag }} "121" "1" "$BASE_URL"
+          python3 v_h/h.py ${{ matrix.tag }} "137" "4" "$BASE_URL"
