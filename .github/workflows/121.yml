@@ -2,7 +2,7 @@ name: Hungary 121
 
 on:
   schedule:
-    - cron: '30 22 * * *'
+    - cron: '35 22 * * *'
 
 jobs:
   build:
