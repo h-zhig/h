@@ -55,7 +55,7 @@ def register(dt):
             else:
                 break
         else:
-            telegram.send_doc(caption=f'{name}{index}слот{t}Hzhig{user} Не прогрузился язык или дата', html=driver.page_source)
+            telegram.send_doc(caption=f'{name}{index}слот{t}H2zhig{user} Не прогрузился язык или дата', html=driver.page_source)
             raise RuntimeError(f'Не прогрузился язык или дата {name}-{index}')
         f.click_on_while('//button[@id="langSelector"]')
         while True:
@@ -91,7 +91,7 @@ def register(dt):
         f.click_on_while('Сохранить')
         logging.warning('Выбрали Тип услуги')
         f.type_in('//input[@id="label4"]', name)
-        logging.warning(f'Ввод имя: {name}{index}слот{t}Hzhig{user}')
+        logging.warning(f'Ввод имя: {name}{index}слот{t}H2zhig{user}')
         f.type_in('//input[@id="birthDate"]', date.replace('.', '/'))
         logging.warning('Ввод рождение')
         f.type_in_clear('//input[@id="label6"]', count_person)
@@ -138,7 +138,7 @@ def register(dt):
                 sleep(0.1)
         click_span = int(index)
         dt = datetime.strptime(datetime.now(tz=timezone.utc).strftime('%m/%d/%Y/%H/%M/%S.%f'), '%m/%d/%Y/%H/%M/%S.%f')
-        logging.warning(f'Нажали выбор даты:{dt}{index}слот{t}Hzhig{user}')
+        logging.warning(f'Нажали выбор даты:{dt}{index}слот{t}H2zhig{user}')
         if f.is_element_displayed('//span[text()="Свободно"]'):
             count_span = len(driver.find_elements(By.XPATH, '//span[text()="Свободно"]'))
             source = driver.page_source
@@ -167,24 +167,24 @@ def register(dt):
             # telegram.send_message(f'{thread}: {datetime.now()}')
             telegram.send_doc(f'В. Даты {name}, {index}слот{t}H3conf{user}', source)
             sleep(90)
-            telegram.send_doc(f'В. Перед завершением бронирования {name} {index}слот{t}Hzhig{user}', driver.page_source)
+            telegram.send_doc(f'В. Перед завершением бронирования {name} {index}слот{t}H2zhig{user}', driver.page_source)
             f.click_on_while('Завершение бронирования')
             dt = datetime.strptime(datetime.now(tz=timezone.utc).strftime('%m/%d/%Y/%H/%M/%S.%f'),
                                    '%m/%d/%Y/%H/%M/%S.%f')
             logging.warning(f'ЗАПИСАН:({name}): {dt}')
             sleep(10)
-            telegram.send_doc(f'🟩В: в {dt} успешно зарегистрирован({name} {index}слот{t}Hzhig{user})',
+            telegram.send_doc(f'🟩В: в {dt} успешно зарегистрирован({name} {index}слот{t}H2zhig{user})',
                               driver.page_source)
         else:
             if f.is_element_displayed(
                     '//div[text()="Обращаем Ваше внимание, что у Вас уже есть действующая запись для решения данного вопроса."]'):
-                telegram.send_doc(f'⭕В {name} уже зареген другим сеансом {index}слот{t}Hzhig{user}',
+                telegram.send_doc(f'⭕В {name} уже зареген другим сеансом {index}слот{t}H2zhig{user}',
                                   driver.page_source)
                 logging.warning('Уже зареген')
                 driver.close()
             else:
-                telegram.send_doc(f'⭕В для:{name} нет дат {index}слот{t}Hzhig{user}', driver.page_source)
-                logging.warning(f'Нет дат: {index}слот{t}Hzhig{user}')
+                telegram.send_doc(f'⭕В для:{name} нет дат {index}слот{t}H2zhig{user}', driver.page_source)
+                logging.warning(f'Нет дат: {index}слот{t}H2zhig{user}')
                 if f.is_element_displayed('//button[text()="Хорошо"]'):
                     for i in range(20):
                         try:
@@ -197,9 +197,9 @@ def register(dt):
                         raise RuntimeError("Не нажимается хорошо")
     except Exception as e:
         try:
-            telegram.send_image(driver, f'В неизвестная ошибка {str(e)} {index}слот{t}Hzhig{user}')
+            telegram.send_image(driver, f'В неизвестная ошибка {str(e)} {index}слот{t}H2zhig{user}')
         except Exception:
-            telegram.send_message(f'В неизвестная ошибка.{index}слот{t}Hzhig{user} {str(e)}')
+            telegram.send_message(f'В неизвестная ошибка.{index}слот{t}H2zhig{user} {str(e)}')
 
 
 if __name__ == "__main__":
