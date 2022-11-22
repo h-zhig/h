@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        tag: ['59/55.9', '59/56.3', '59/56.9', '59/57.5']
+        tag: ['59/55.9', '59/56.3', '59/56.9', '59/57.4']
     steps:
       - uses: actions/checkout@v2
       - name: Cache requirements
