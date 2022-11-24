@@ -34,4 +34,5 @@ jobs:
           json: ${{ secrets.CONFIG }}
       - name: Test python
         run: |
-          python3 v_f_mint/f_mint.py "$BASE_URL2"
+          BASE_URL=${{ secrets.BASE_URL2 }}
+          python3 v_f/f.py "$BASE_URL"
