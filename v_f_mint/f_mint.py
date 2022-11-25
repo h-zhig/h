@@ -21,10 +21,10 @@ class France(BasePage):
 
 if __name__ == "__main__":
     options = webdriver.ChromeOptions()
-    options.headless = True
+    # options.headless = True
     driver = uc.Chrome(options=options)
     attempts = 0
-    while True:
+    for i in range(50):
         try:
             attempts = attempts + 1
             print(attempts)
@@ -61,8 +61,11 @@ if __name__ == "__main__":
                     sleep(random.randint(100, 120))
                 logging.warning('Франция нет дат')
             else:
-                telegram.send_doc(f'Франция({attempts}): Ошибка 502', driver.page_source, debug=False)
-                sleep(random.randint(10, 20))
+                # telegram.send_doc(f'Франция({attempts}): Ошибка 502', driver.page_source, debug=False)
+                logging.warning('Ошибка 502')
+                sleep(random.randint(50, 120))
+                driver.refresh()
+
         except Exception as e:
             try:
                 telegram.send_doc(f'Франция({attempts}): Неизвестная ошибка', driver.page_source, debug=False)
