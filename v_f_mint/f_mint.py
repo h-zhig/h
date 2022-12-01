@@ -63,7 +63,9 @@ if __name__ == "__main__":
                 logging.warning('Франция нет дат')
             else:
                 # telegram.send_doc(f'Франция({attempts}): Ошибка 502', driver.page_source, debug=False)
-                logging.warning('Ошибка 502')
+                dt = datetime.strptime(datetime.now(tz=timezone.utc).strftime('%m/%d/%Y/%H/%M/%S.%f'),
+                                       '%m/%d/%Y/%H/%M/%S.%f')
+                logging.warning(f'Ошибка 502{dt}')
                 sleep(random.randint(50, 120))
                 driver.refresh()
 
