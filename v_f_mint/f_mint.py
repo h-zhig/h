@@ -1,3 +1,4 @@
+import datetime
 import logging
 import random
 
@@ -28,7 +29,7 @@ if __name__ == "__main__":
     for i in range(50):
         try:
             attempts = attempts + 1
-            print(attempts)
+            logging.warning(f'{attempts}, {datetime.datetime.now()}')
             driver.delete_all_cookies()
             driver.get(sys.argv[1])
             f = France(driver)
@@ -55,6 +56,7 @@ if __name__ == "__main__":
                             driver.quit()
                             break
                 elif not f.is_element_displayed('На сегодня нет свободных мест.'):
+                    telegram.send_image(driver, f'Франия({attempts}): Есть даты! ')
                     telegram.send_doc(f'Франия({attempts}): Есть даты!', driver.page_source, debug=False)
                     logging.warning('Слот')
                     sleep(random.randint(100, 120))
