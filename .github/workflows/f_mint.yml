@@ -1,9 +1,9 @@
 name: Fr
 
 on:
-#  schedule:
-#    - cron: '0 */6 * * *'
-jobs:
+  schedule:
+      - cron: '0 */6 * * *'
+  jobs:
   build:
     runs-on: ubuntu-latest
     steps:
