@@ -26,7 +26,7 @@ if __name__ == "__main__":
     # driver = uc.Chrome(options=options)
     driver = webdriver.Chrome(options=options)
     attempts = 0
-    for i in range(15):
+    for i in range(23):
         try:
             attempts = attempts + 1
             logging.warning(f'{attempts}, {datetime.datetime.now()}')
