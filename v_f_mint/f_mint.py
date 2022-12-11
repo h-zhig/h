@@ -26,7 +26,7 @@ if __name__ == "__main__":
     # driver = uc.Chrome(options=options)
     driver = webdriver.Chrome(options=options)
     attempts = 0
-    for i in range(23):
+    for i in range(25):
         try:
             attempts = attempts + 1
             logging.warning(f'{attempts}, {datetime.datetime.now()}')
@@ -65,6 +65,7 @@ if __name__ == "__main__":
                 logging.warning('Франция нет дат')
             else:
                 # telegram.send_doc(f'Франция({attempts}): Ошибка 502', driver.page_source, debug=False)
+                logging.warning(f'ООшибка 502{attempts}')
                 dt = datetime.strptime(datetime.now(tz=timezone.utc).strftime('%m/%d/%Y/%H/%M/%S.%f'),
                                        '%m/%d/%Y/%H/%M/%S.%f')
                 logging.warning(f'Ошибка 502{dt}')
@@ -73,7 +74,8 @@ if __name__ == "__main__":
 
         except Exception as e:
             try:
-                telegram.send_doc(f'Франция({attempts}): Неизвестная ошибка', driver.page_source, debug=False)
+                # telegram.send_doc(f'Франция({attempts}): Неизвестная ошибка', driver.page_source, debug=False)
+                logging.warning(f'Ошибка 502{attempts}')
                 sleep(random.randint(100, 120))
             except Exception as e:
                 telegram.send_message(f'Франция({attempts}): Неизвестная ошибка\n{str(e)}', debug=False)
