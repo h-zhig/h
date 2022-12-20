@@ -2,14 +2,14 @@ name: Hungary 134-4
 
 on:
   schedule:
-    - cron: '30 22 * * *'
+    - cron: '39 22 * * *'
 
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        tag: ['59/56.0', '59/55.9', '59/55.8', '59/55.9', '59/56.0', '59/57.0']
+        tag: ['59/56.0', '59/55.8', '59/55.9', '59/57.5']
     steps:
       - uses: actions/checkout@v2
       - name: Cache requirements
