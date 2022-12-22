@@ -73,7 +73,7 @@ def register(dt):
             city_text = driver.find_element(By.XPATH, '//div[contains(@class, value-country)]/a[@title="Посмотреть точное место на карте"]').get_attribute("text")
             logging.warning(ip_text)
             logging.warning(city_text)
-            telegram.send_doc(caption=f'{name}{index}слот{t}H2zhig{user} Не прогрузился язык или дата{ip_text}-{city_text}', html=driver.page_source)
+            telegram.send_doc(caption=f'{name}{index}слот{t}H2zhig{user} Не прогрузился язык или дата{ip_text}-{city_textK}', html=driver.page_source)
             raise RuntimeError(f'Не прогрузился язык или дата {name}-{index}')
         f.click_on_while('//button[@id="langSelector"]')
         while True:
