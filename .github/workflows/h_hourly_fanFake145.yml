@@ -1,8 +1,8 @@
 name: Hungary 145Hfake
 
 on:
-  schedule:
-    - cron: '39 * * * *'
+#  schedule:
+#    - cron: '39 * * * *'
 
 jobs:
   build:
